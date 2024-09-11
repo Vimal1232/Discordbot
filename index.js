@@ -6,6 +6,10 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
   ],
 });
+import { configDotenv } from "dotenv";
+
+configDotenv();
+
 const GenerateImage = async (Text) => {
   try {
     const response = await fetch(
@@ -16,7 +20,7 @@ const GenerateImage = async (Text) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          key: "akm9LVhNvSojpOu4tYeh6fqAdfxR9a5qolLCHl7AkpG0pkti1KLHR69Si8jn",
+          key: process.env.API,
           prompt: Text,
           negative_prompt: "bad quality",
           width: "512",
@@ -79,6 +83,4 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
-client.login(
-  "MTI4Mjk1MjIyOTExMTczMDE4OQ.GlPQch.hEqyiEBTG1ev_8Ho8Py0BNbGHJyGxno666-dsk"
-);
+client.login(process.env.TOKEN);
